@@ -6,7 +6,7 @@ class A58moneysSpider(scrapy.Spider):
     name = '58moneys'
     allowed_domains = ['58moneys.com']
     start_urls = ['https://www.58moneys.com/finance.html']
-    base_url = 'https://www.58moneys.com/'
+    base_url = 'https://www.58moneys.com'
 
     def parse(self, response):
         news = response.xpath('//*[@id="ajaxGetNewsList"]/ul/li')
@@ -15,4 +15,17 @@ class A58moneysSpider(scrapy.Spider):
             item["title"] = each.xpath('./div[1]/a/text()').extract()[0]
             item["time"] = each.xpath('./div[2]/text()').extract()[0]
             item["href"] = self.base_url + each.xpath('./div[1]/a/@href').extract()[0]
-            print(item)
+            request = scrapy.Request(url=item["href"], callback=self.parseHref)
+            request.meta['item'] = item
+            yield request
+            # print(item)
+
+    def parseHref(self, response):
+        item = response.meta['item']
+        article = response.xpath('//div[@class="nr"]/p')
+        detail = ''
+        for p in article:
+            if len(p.xpath('./text()').extract()) > 0:
+                detail += p.xpath('./text()').extract()[0]
+        item['detail'] = detail
+        yield item
