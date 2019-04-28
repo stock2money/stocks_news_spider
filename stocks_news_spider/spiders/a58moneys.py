@@ -5,7 +5,16 @@ from stocks_news_spider.items import NewsItem
 class A58moneysSpider(scrapy.Spider):
     name = '58moneys'
     allowed_domains = ['58moneys.com']
-    start_urls = ['https://www.58moneys.com/finance.html']
+    start_urls = ['https://www.58moneys.com/finance.html',
+                  'https://www.58moneys.com/finance2.html',
+                  'https://www.58moneys.com/finance3.html',
+                  'https://www.58moneys.com/finance4.html',
+                  'https://www.58moneys.com/finance5.html',
+                  'https://www.58moneys.com/finance6.html',
+                  'https://www.58moneys.com/finance7.html',
+                  'https://www.58moneys.com/finance8.html',
+                  'https://www.58moneys.com/finance9.html']
+                  
     base_url = 'https://www.58moneys.com'
 
     def parse(self, response):
