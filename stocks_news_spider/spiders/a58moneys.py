@@ -18,6 +18,7 @@ class A58moneysSpider(scrapy.Spider):
     base_url = 'https://www.58moneys.com'
 
     def parse(self, response):
+        print("---", response)
         news = response.xpath('//*[@id="ajaxGetNewsList"]/ul/li')
         for each in news:
             item = NewsItem()

@@ -28,6 +28,7 @@ class StocksNewsSpiderPipeline(object):
             self.cursor.execute(sql,(item['time'],item['title'],item['href'],item['detail']))
             self.cursor.connection.commit()
         except BaseException as e:
+            print(e)
             print("文章已存在")
             self.connect.rollback()
         return item
