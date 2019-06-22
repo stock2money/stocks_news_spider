@@ -36,6 +36,6 @@ class A58moneysSpider(scrapy.Spider):
         detail = ''
         for p in article:
             if len(p.xpath('./text()').extract()) > 0:
-                detail += p.xpath('./text()').extract()[0]
+                detail += p.xpath('./text()').extract()[0] + '&'
         item['detail'] = detail
         yield item

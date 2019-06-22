@@ -25,6 +25,8 @@ class StocksNewsSpiderPipeline(object):
     def process_item(self, item, spider):
         sql = "INSERT INTO news(time, title, href, detail) VALUES(%s,%s,%s,%s)"
         try:
+            if item['detail'] == '' or item['detail'] == None:
+                return item
             self.cursor.execute(sql,(item['time'],item['title'],item['href'],item['detail']))
             self.cursor.connection.commit()
         except BaseException as e:

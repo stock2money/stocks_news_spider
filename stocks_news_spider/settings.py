@@ -54,7 +54,7 @@ ROBOTSTXT_OBEY = True
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    # 'stocks_news_spider.middlewares.StocksNewsSpiderDownloaderMiddleware': 543,
-   'scrapy.downloadermiddleware.useragent.UserAgentMiddleware': None,
+   # 'scrapy.downloadermiddleware.useragent.UserAgentMiddleware': None,
    'stocks_news_spider.middlewares.MyUserAgentMiddleware': 400,
 }
 
